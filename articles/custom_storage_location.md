@@ -37,18 +37,26 @@ To allow authorized Synapse users to upload data to your bucket set read-write p
 
 {% highlight json %}
 {
+    "Version": "2012-10-17",
     "Statement": [
         {
-            "Action": "s3:ListBucket*",
             "Effect": "Allow",
-            "Resource": "arn:aws:s3:::thisisthenameofmybucket",
-            "Principal": { "AWS": "325565585839" }
+            "Principal": {
+                "AWS": "arn:aws:iam::325565585839:root"
+            },
+            "Action": "s3:ListBucket*",
+            "Resource": "arn:aws:s3:::thisisthenameofmybucket"
         },
         {
-            "Action": [ "s3:*Object*", "s3:*MultipartUpload*" ],
             "Effect": "Allow",
-            "Resource": "arn:aws:s3:::thisisthenameofmybucket/*",
-            "Principal": { "AWS": "325565585839" }
+            "Principal": {
+                "AWS": "arn:aws:iam::325565585839:root"
+            },
+            "Action": [
+                "s3:*Object*",
+                "s3:*MultipartUpload*"
+            ],
+            "Resource": "arn:aws:s3:::thisisthenameofmybucket/*"
         }
     ]
 }
@@ -85,18 +93,26 @@ If you do not want to allow authorized Synapse users to upload data to your buck
 
 {% highlight json %}
 {
+    "Version": "2012-10-17",
     "Statement": [
         {
-            "Action": "s3:ListBucket*",
             "Effect": "Allow",
-            "Resource": "arn:aws:s3:::synapse-share.yourcompany.com",
-            "Principal": { "AWS": "325565585839" }
+            "Principal": {
+                "AWS": "arn:aws:iam::325565585839:root"
+            },
+            "Action": "s3:ListBucket*",
+            "Resource": "arn:aws:s3:::thisisthenameofmybucket"
         },
         {
-            "Action": [ "s3:GetObject*", "s3:*MultipartUpload*" ],
             "Effect": "Allow",
-            "Resource": "arn:aws:s3:::synapse-share.yourcompany.com/*",
-            "Principal": { "AWS": "325565585839" }
+            "Principal": {
+                "AWS": "arn:aws:iam::325565585839:root"
+            },
+            "Action": [
+                "s3:GetObject*",
+                "s3:*MultipartUpload*"
+            ],
+            "Resource": "arn:aws:s3:::thisisthenameofmybucket/*"
         }
     ]
 }
